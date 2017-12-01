@@ -126,7 +126,6 @@ public class FirstCode {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 allPoint[i][j].value = allPoint[i][j].value - allPoint[i][j].distance;
-//                xingJiaBi[i][j] = value[i][j]/allPoint[i][j].distance;
             }
         }
 
@@ -165,11 +164,14 @@ public class FirstCode {
             Point endPoint = stepStack.pop();
 
             if(startPoint.x == endPoint.x){
-                if(startPoint.y < endPoint.y)
+                if(startPoint.y < endPoint.y){
                     mResultBean = getControl(mId, "D");
-                if(startPoint.y > endPoint.y){
+                } else if(startPoint.y > endPoint.y){
                     mResultBean = getControl(mId, "U");
+                }else {
+                    System.out.println("error");
                 }
+
             }else if(startPoint.x <endPoint.x){
                 mResultBean = getControl(mId, "R");
             }else if(startPoint.x > endPoint.x){
