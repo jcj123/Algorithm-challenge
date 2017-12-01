@@ -91,7 +91,9 @@ public class FirstCode {
         Set<Point> unViewedPointSet = new HashSet<Point>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                unViewedPointSet.add(allPoint[i][j]);
+                if(!allPoint[i][j].fobidden ){
+                    unViewedPointSet.add(allPoint[i][j]);
+                }
             }
         }
         viewedPointSet.add(pointStart);
@@ -102,7 +104,7 @@ public class FirstCode {
         while (!unViewedPointSet.isEmpty()) {
             Point addPoint = new Point(Integer.MAX_VALUE);
             for (Point point : viewedPointSet) {
-                if(point.nextPointList == null && point.nextPointList.isEmpty()){
+                if(point.nextPointList == null || point.nextPointList.isEmpty()){
                     continue;
                 }
                 for (Point nextPoint : point.nextPointList) {
