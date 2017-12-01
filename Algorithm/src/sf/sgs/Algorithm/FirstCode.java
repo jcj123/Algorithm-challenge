@@ -78,7 +78,7 @@ public class FirstCode {
         //模型初始化完成
 
         mPointStart = allPoint[0][0];
-        while(mStep < 288){
+        while(mStep < 400){
             findPath(mPointStart);
         }
     }
@@ -132,13 +132,15 @@ public class FirstCode {
         int destPointX = 0;
         int destPointY = 0;
         int step = 0;
-        int tempValue = Integer.MIN_VALUE;
+        int tempValue = 0;
         for(int i=0; i<12; i++){
             for(int j = 0; j<12; j++){
                 if(allPoint[i][j].value > tempValue){
                     tempValue = allPoint[i][j].value;
-                    destPointY = i;
-                    destPointX = j;
+                    if(destPointX != mPointStart.x && destPointY != mPointStart.y){
+                        destPointY = i;
+                        destPointX = j;
+                    }
                 }
             }
         }
@@ -199,7 +201,7 @@ public class FirstCode {
         }
 
         for (ResultBean.StateBean.JobsBean job : jobs) {
-            allPoint[job.getY()][job.getX()].value = job.getValue();
+            allPoint[job.getY()][job.getX()].value = (int)job.getValue();
         }
     }
 

@@ -186,7 +186,7 @@ public class ResultBean {
 
             private int y;
             private int x;
-            private int value;
+            private float value;
 
             public int getY() {
                 return y;
@@ -204,11 +204,11 @@ public class ResultBean {
                 this.x = x;
             }
 
-            public int getValue() {
+            public float getValue() {
                 return value;
             }
 
-            public void setValue(int value) {
+            public void setValue(float value) {
                 this.value = value;
             }
 
