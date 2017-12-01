@@ -80,12 +80,14 @@ public class FirstCode {
 
         mPointStart = allPoint[0][0];
         while(mStep < 400){
-            findPath(mPointStart);
+            Point destPoint = findPath(mPointStart);
+            goToTheDestPoint(mPointStart,destPoint);
+            resetAllPointInfo();
         }
     }
 
 
-    private static void findPath(Point pointStart){
+    private static Point findPath(Point pointStart){
         pointStart.distance = 0;
         pointStart.value = Integer.MIN_VALUE;
 
@@ -157,10 +159,7 @@ public class FirstCode {
         }
 
         //找到目标节点，并返回路径
-        Point destPoint = allPoint[destPointX][destPointY];
-        goToTheDestPoint(pointStart,destPoint);
-        resetAllPointInfo();
-        mPointStart = destPoint;
+        return allPoint[destPointX][destPointY];
     }
 
 
@@ -194,14 +193,19 @@ public class FirstCode {
             }
             mStep++;
             System.out.println(mStep);
+            System.out.println("mScore" + mScore);
             pointNow = endPoint;
             mScore += mResultBean.getReward();
+            mPointStart = allPoint[mResultBean.getState().getAi().getY()][mResultBean.getState().getAi().getX()];
         }
     }
 
     //重置节点数据
     private static void resetAllPointInfo(){
+        if(mResultBean == null || mResultBean.getState() == null)return;
         List<ResultBean.StateBean.JobsBean> jobs = mResultBean.getState().getJobs();
+
+        mPointStart = allPoint[mResultBean.getState().getAi().getY()][mResultBean.getState().getAi().getX()];
 
         for(int i=0; i<12; i++){
             for(int j = 0; j<12; j++){
@@ -216,6 +220,12 @@ public class FirstCode {
             allPoint[job.getY()][job.getX()].value = (int)job.getValue();
         }
     }
+
+
+
+
+
+
 
     //获取环境
     private static TestBean getEnvironment() {
