@@ -86,6 +86,7 @@ public class FirstCode {
 
     private static void findPath(Point pointStart){
         pointStart.distance = 0;
+        pointStart.value = Integer.MIN_VALUE;
 
         Set<Point> viewedPointSet = new HashSet<Point>();
         Set<Point> unViewedPointSet = new HashSet<Point>();
@@ -128,19 +129,18 @@ public class FirstCode {
                 allPoint[i][j].value = allPoint[i][j].value - allPoint[i][j].distance;
             }
         }
+        allPoint[0][0].value = 0;
 
         int destPointX = 0;
         int destPointY = 0;
         int step = 0;
-        int tempValue = 0;
+        int tempValue = Integer.MIN_VALUE;
         for(int i=0; i<12; i++){
             for(int j = 0; j<12; j++){
                 if(allPoint[i][j].value > tempValue){
                     tempValue = allPoint[i][j].value;
-                    if(destPointX != mPointStart.x && destPointY != mPointStart.y){
-                        destPointY = i;
-                        destPointX = j;
-                    }
+                    destPointY = i;
+                    destPointX = j;
                 }
             }
         }
