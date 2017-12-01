@@ -30,6 +30,7 @@ public class FirstCode {
 
         algorithm(testBean);
         getReplay(testBean.getId());
+        System.out.println(mScore);
     }
 
     //算法
@@ -135,14 +136,20 @@ public class FirstCode {
         }
         allPoint[mPointStart.x][mPointStart.y].value = 0;
 
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                xingJiaBi[i][j] = allPoint[i][j].value/allPoint[i][j].distance;
+            }
+        }
+
         int destPointX = 0;
         int destPointY = 0;
         int step = 0;
-        int tempValue = Integer.MIN_VALUE;
+        float tempValue = Float.MIN_VALUE;
         for(int i=0; i<12; i++){
             for(int j = 0; j<12; j++){
-                if(allPoint[i][j].value > tempValue){
-                    tempValue = allPoint[i][j].value;
+                if(xingJiaBi[i][j] > tempValue){
+                    tempValue = xingJiaBi[i][j];
                     destPointX = i;
                     destPointY = j;
                 }
@@ -188,6 +195,7 @@ public class FirstCode {
             mStep++;
             System.out.println(mStep);
             pointNow = endPoint;
+            mScore += mResultBean.getReward();
         }
     }
 
