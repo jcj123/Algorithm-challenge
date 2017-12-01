@@ -102,7 +102,7 @@ public class FirstCode {
         while (!unViewedPointSet.isEmpty()) {
             Point addPoint = new Point(Integer.MAX_VALUE);
             for (Point point : viewedPointSet) {
-                if(point.nextPointList.isEmpty()){
+                if(point.nextPointList == null && point.nextPointList.isEmpty()){
                     continue;
                 }
                 for (Point nextPoint : point.nextPointList) {
