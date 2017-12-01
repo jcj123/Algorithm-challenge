@@ -37,8 +37,6 @@ public class FirstCode {
         List<TestBean.StateBean.JobsBean> jobs = testBean.getState().getJobs();
         List<TestBean.StateBean.WallsBean> walls = testBean.getState().getWalls();
 
-        mPointStart = new Point(0, 0);
-        mPointStart.distance = 0;
 
         //初始化网格
         for (int i = 0; i < 12; i++) {
@@ -79,6 +77,7 @@ public class FirstCode {
 
         //模型初始化完成
 
+        mPointStart = allPoint[0][0];
         while(mStep < 288){
             findPath(mPointStart);
         }
@@ -96,12 +95,16 @@ public class FirstCode {
             }
         }
         viewedPointSet.add(pointStart);
+        unViewedPointSet.remove(pointStart);
 
 
         //核心算法
         while (!unViewedPointSet.isEmpty()) {
             Point addPoint = new Point(Integer.MAX_VALUE);
             for (Point point : viewedPointSet) {
+                if(point.nextPointList.isEmpty()){
+                    continue;
+                }
                 for (Point nextPoint : point.nextPointList) {
                     if(nextPoint.hasAdd){
                         continue;
@@ -113,6 +116,7 @@ public class FirstCode {
                     }
                 }
             }
+            addPoint.hasAdd = true;
             viewedPointSet.add(addPoint);
             unViewedPointSet.remove(addPoint);
         }
@@ -169,9 +173,10 @@ public class FirstCode {
             }else if(startPoint.x > endPoint.x){
                 mResultBean = getControl(mId, "L");
             }else{
-                System.out.println("");
+                System.out.println("error");
             }
             mStep++;
+            System.out.println("step + 1");
             pointNow = endPoint;
         }
     }
@@ -239,6 +244,7 @@ public class FirstCode {
             this.x = x;
             this.y = y;
             distance = Integer.MAX_VALUE;
+            nextPointList = new HashSet<>();
         }
 
         public Point(int distance) {
