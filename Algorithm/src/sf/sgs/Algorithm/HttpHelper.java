@@ -24,4 +24,19 @@ public class HttpHelper {
         }
         return result;
     }
+    public static String get(String url,String json){
+        String result = null;
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        try {
+            response = client.newCall(request).execute();
+            result = response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
