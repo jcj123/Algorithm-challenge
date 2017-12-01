@@ -171,7 +171,8 @@ public class FirstCode {
             destPoint = destPoint.previousPoint;
         }
 
-        while(!stepStack.isEmpty()){
+        int round = 0;
+        while(!stepStack.isEmpty() && round < 6){
             Point startPoint = pointNow;
             Point endPoint = stepStack.pop();
 
@@ -192,6 +193,7 @@ public class FirstCode {
                 System.out.println("error");
             }
             mStep++;
+            round++;
             System.out.println(mStep);
             System.out.println("mScore" + mScore);
             pointNow = endPoint;
