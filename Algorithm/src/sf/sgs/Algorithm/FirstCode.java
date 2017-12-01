@@ -139,8 +139,8 @@ public class FirstCode {
             for(int j = 0; j<12; j++){
                 if(allPoint[i][j].value > tempValue){
                     tempValue = allPoint[i][j].value;
-                    destPointY = i;
-                    destPointX = j;
+                    destPointX = i;
+                    destPointY = j;
                 }
             }
         }
