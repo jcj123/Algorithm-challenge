@@ -114,7 +114,7 @@ public class FirstCode {
                     nextPoint.distance = point.distance + 1;
                     if (nextPoint.distance < addPoint.distance) {   //遍历已赋值的节点，找到数值最小的那个
                         addPoint = nextPoint;
-                        nextPoint.previousPoint = point;
+                        addPoint.previousPoint = point;
                     }
                 }
             }
@@ -154,7 +154,7 @@ public class FirstCode {
     private static void goToTheDestPoint(Point pointNow, Point destPoint){
         Stack<Point> stepStack = new Stack<>();
         stepStack.add(destPoint);
-        while(destPoint.previousPoint.x != pointNow.x && destPoint.previousPoint.y != pointNow.y){
+        while(destPoint.previousPoint != mPointStart){
             stepStack.add(destPoint.previousPoint);
             destPoint = destPoint.previousPoint;
         }
@@ -180,7 +180,7 @@ public class FirstCode {
                 System.out.println("error");
             }
             mStep++;
-            System.out.println("step + 1");
+            System.out.println(mStep);
             pointNow = endPoint;
         }
     }
