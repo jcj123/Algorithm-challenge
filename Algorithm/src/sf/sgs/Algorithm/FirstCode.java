@@ -15,8 +15,8 @@ public class FirstCode {
         System.out.println(testBean.toString());
         return testBean;
     }
-    public static ResultBean getControl(TestBean resultTestBean) {
-        String controlUrl = "http://10.2.5.64/test/"+resultTestBean.getId()+"/move";
+    public static ResultBean getControl(String id) {
+        String controlUrl = "http://10.2.5.64/test/"+id+"/move";
         ControlBean controlBean = new ControlBean("U");
         String controlJson = gson.toJson(controlBean);
         System.out.println("controlJson:"+controlJson);
@@ -26,9 +26,16 @@ public class FirstCode {
         System.out.println(resultBean.toString());
         return resultBean;
     }
+
+    public static void getReplay(String id) {
+        String replayUrl = "http://10.2.5.64/test/replays/"+id;
+        String repalyJson = HttpHelper.get(replayUrl);
+        System.out.println("repalyJson :"+repalyJson);
+    }
     public static void main(String[] args) {
         TestBean resultTestBean = getEnvironment();
-        ResultBean controlBean = getControl(resultTestBean);
+        ResultBean controlBean = getControl(resultTestBean.getId());
+        getReplay(resultTestBean.getId());
     }
 
 }

@@ -24,7 +24,7 @@ public class HttpHelper {
         }
         return result;
     }
-    public static String get(String url,String json){
+    public static String get(String url){
         String result = null;
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
