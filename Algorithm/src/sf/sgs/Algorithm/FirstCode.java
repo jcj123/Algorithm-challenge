@@ -104,6 +104,7 @@ public class FirstCode {
         //核心算法
         while (!unViewedPointSet.isEmpty()) {
             Point addPoint = new Point(Integer.MAX_VALUE);
+            boolean hasFound = false;
             for (Point point : viewedPointSet) {
                 if(point.nextPointList == null || point.nextPointList.isEmpty()){
                     continue;
@@ -114,14 +115,17 @@ public class FirstCode {
                     }
                     nextPoint.distance = point.distance + 1;
                     if (nextPoint.distance < addPoint.distance) {   //遍历已赋值的节点，找到数值最小的那个
+                        hasFound = true;
                         addPoint = nextPoint;
                         addPoint.previousPoint = point;
                     }
                 }
             }
-            addPoint.hasAdd = true;
-            viewedPointSet.add(addPoint);
-            unViewedPointSet.remove(addPoint);
+            if(hasFound){
+                addPoint.hasAdd = true;
+                viewedPointSet.add(addPoint);
+                unViewedPointSet.remove(addPoint);
+            }
         }
 
         for (int i = 0; i < 12; i++) {
@@ -129,7 +133,7 @@ public class FirstCode {
                 allPoint[i][j].value = allPoint[i][j].value - allPoint[i][j].distance;
             }
         }
-        allPoint[0][0].value = 0;
+        allPoint[mPointStart.x][mPointStart.y].value = 0;
 
         int destPointX = 0;
         int destPointY = 0;
